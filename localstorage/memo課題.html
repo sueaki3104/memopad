@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>🏃ランニングの記録🏃</title>
+  <link rel="stylesheet" href="css/memo課題.css">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+  <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>ランニングの記録</h1>
+  </header>
+  <div class="run_record">
+    <ul>走った日</ul>
+    <input type="text" id="datepicker" width="150px" heigth="60px" placeholder="クリックしてください">
+    <ul>走った距離（単位：km） </ul>
+    <!-- input type="number" だとマイナスが入力可能 -->
+    <!-- なのでMAXMINを設定 -->
+    <input type="number" step="1" id="run_distance" text="km" max="150" min="0" placeholder="0から150のみ入力可能">
+    <div class="error">小数点以下は入力できません</div>
+  </div>
+  <button id="save">保存</button>
+  <footer>
+    <small>G's</small>
+  </footer>
+
+  <script>
+    //走った日の右側ボタンを押したら、カレンダーが出てきて日付を指定できる
+    //日本語を指定  
+    $(function () {
+      $.datepicker.setDefaults($.datepicker.regional["ja"]);
+      $("#datepicker").datepicker();
+    });
+    // 保存ボタンを押したら日付をdatepicker　走行距離をrun_distance　にて確定
+    $('#save').on('click', function () {
+      const datepicker = $('#datepicker').val();
+      const run_distance = $('#run_distance').val();
+      const data = {
+        datepicker: datepicker,
+        run_distance: run_distance,
+      }
+      console.log(data);
+    });
+  </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

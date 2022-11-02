@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>myMemoPad中級</title>
+  <link rel="stylesheet" href="css/sample.css">
+</head>
+
+<body>
+  <header>
+    <h1>MemoPad中級編</h1>
+  </header>
+
+  <main>
+    <input type="text" id="input1">
+    <input type="text" id="input2">
+    <input type="text" id="input3">
+    <input type="text" id="input4">
+    <textarea id="text_area"></textarea>
+    <ul>
+      <li id="save">Save</li>
+      <li id="clear">Clear</li>
+    </ul>
+  </main>
+
+  <footer>
+    <small>G's</small>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+      // saveボタンを押したときに、 
+  $('#save').on('click', function () {
+    const input1 = $('#input1').val();
+    const input2 = $('#input2').val();
+    const input3 = $('#input3').val();
+    const input4 = $('#input4').val();
+    const text = $('#text_area').val();
+
+    const data = {
+      title1: input1,
+      title2: input2,
+      title3: input3,
+      title4: input4,
+      text : text,
+    }
+    console.log(data);
+
+    const jsonData = JSON.stringify(data);
+    console.log(jsonData)
+    localStorage.setItem("key1", jsonData);
+  });
+
+  if(localStorage.getItem('key1')){
+      const jsonData = localStorage.getItem("key1");
+      console.log(jsonData);
+      const data = JSON.parse(jsonData);
+      console.log(data);
+      const title1 = data.title1;
+      const title2 = data.title2; 
+      const title3 = data.title3;
+      const title4 = data.title4;
+      const text = data.text;
+      $('#input1').val(title1);
+      $('#input2').val(title2);
+      $('#input3').val(title3);
+      $('#input4').val(title4);
+      $('#text_area').val(text);
+  };
+
+   // データを削除するとき
+    // $('#clear').on('click', function () {
+      // $('#input1').val('');
+      // $('#input2').val('');
+      // $('#input3').val('');
+      // $('#input4').val('');
+      // $('#text_area').val('');
+      // localStorage.removeItem('key1');
+    // });
+
+    
+    // $('#data') = json.parse(jsonData);
+    // console.log(data)
+
+ 
+ 
+    //  const text = $('#text_area').val();
+      // localStorage.setItem('memo', text);
+   
+  </script>
+
+</body>
+
+</html>
