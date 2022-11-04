@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localStorageの勉強</title>
+  <link rel="stylesheet" href="./css/memo課題ver3.css">
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <!---->
+      <div class="row mt-3">
+        <div class="col-12">
+          <h1>To DoリストっぽいものをlocalStrageに保存して別の場所に表示する</h1> <textarea class="form-control"
+            style="height: 200px;"></textarea>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center"><button class="btn btn-primary">保存する</button></div>
+      </div>
+      <div class="row mt-5 pt-5 border-top">
+        <div class="col-12">
+          <h1>保存済みデータ</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          まだ1件も保存されていません。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script>
+
+
+    var app = new Vue({
+      el: '#app',
+      data() {
+        return {
+          isLs: false,
+          text: '',
+          savedText: []
+
+        }
+      },
+      mounted() {
+        var vm = this;
+        vm.init(); //localStrageが使えるかどうかの判定
+        if (vm.isLs) {
+
+          //保存済みのlocalStrageを読み込む
+          var current = window.localStorage.getItem('text');
+          if (current) {
+            vm.$set(vm, 'savedText', JSON.parse(current))
+          }
+        }
+      },
+      methods: {
+        init() {
+          var vm = this;
+          if (typeof window.localStorage !== 'undefined') {
+            vm.$set(vm, 'isLs', true)
+          }
+        },
+        //保存する
+        save() {
+          var vm = this;
+          vm.savedText.push(vm.text);
+          window.localStorage.setItem('text', JSON.stringify(vm.savedText));
+        },
+        //保存したテキストを読み込み
+        load($event, index) {
+          var vm = this;
+          var loadText = vm.savedText[index];
+          vm.$set(vm, 'text', loadText);
+          window.localStorage.setItem('text', JSON.stringify(vm.savedText));
+
+        },
+        //保存したテキストから1件削除
+        del($event, index) {
+          var vm = this;
+          vm.savedText.splice(index, 1);
+          window.localStorage.setItem('text', JSON.stringify(vm.savedText));
+        }
+      }
+    })
+
+
+  </script>
+
+
+</body>
+
+</html>

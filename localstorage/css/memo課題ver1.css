@@ -1,0 +1,58 @@
+/* 横向きにしている */
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+}
+
+header {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.run_record {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+/* run_distance の枠を広げたいとき */
+/* inputを使ったときはこの形じゃないと指定できない */
+input[type="number"] {
+    width: 200px;
+    font-size: 80%;
+    height: 30px;
+}
+
+input[type="text"] {
+    width: 200px;
+    height: 30px;
+    font-size: 80%;
+}
+
+input {
+    height: 70px;
+}
+
+.datepicker {
+    margin: 20px;
+}
+
+.error {
+    display: none;
+}
+
+input:invalid+.error {
+    display: block;
+    color: red;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.save {
+    width: 100px;
+    height: 50px;
+}
